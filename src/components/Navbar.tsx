@@ -1,6 +1,10 @@
 import { Link } from "react-router";
+import { userDetailsStore } from "../store/store";
 
 const Navbar = () => {
+  const { authenticated, profile_image, username } = userDetailsStore(
+    (state) => state
+  );
   return (
     <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#323543] px-10 py-3 bg-[#1a1b23]">
       <Link to={"/"}>
@@ -24,6 +28,18 @@ const Navbar = () => {
           </h2>
         </div>
       </Link>
+      {authenticated && (
+        <a href={`https://x.com/${username}`} target='_blank'>
+          <div className="flex gap-2 items-center">
+            <img
+              src={profile_image}
+              alt="Profile"
+              className="w-6 h-6 rounded-full object-cover"
+            />
+            <span className="text-gray-100 font-bold text-base">{username}</span>
+          </div>
+        </a>
+      )}
     </header>
   );
 };

@@ -1,4 +1,18 @@
+import { useNavigate } from "react-router";
+import { userDetailsStore } from "../store/store";
 const Home = () => {
+  const navigate = useNavigate()
+  const routeToAnalysisPage = () => {
+    navigate('/analyse')
+  }
+  const authenticated = userDetailsStore((state) => state.authenticated);
+  
+  function redirect() {
+    window.location.href = `${
+      import.meta.env.VITE_BACKEND_BASE_URL
+    }/auth/twitter`;
+  }
+
   return (
     <div>
       <div className="@container">
@@ -34,9 +48,18 @@ const Home = () => {
                 pictures.
               </h2>
             </div>
-            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#30344d] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
-              <span className="truncate">Connect X</span>
-            </button>
+            {authenticated ? (
+              <button onClick={routeToAnalysisPage} className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#30344d] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]">
+                <span className="truncate">Analyze tweets</span>
+              </button>
+            ) : (
+              <button
+                onClick={redirect}
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#30344d] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+              >
+                <span className="truncate">Connect X</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

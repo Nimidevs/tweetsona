@@ -1,6 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
-* {
+body {
   background-color: #1a1b23;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+    width: 30%;
+  }
+  50% {
+    transform: translateX(300%);
+    width: 30%;
+  }
+  100% {
+    transform: translateX(-100%);
+    width: 30%;
+  }
+}
+.animate-progress {
+  animation: progress 4s linear infinite;
 }
